@@ -1,54 +1,62 @@
-import ProductModel from "..ProductModel.js";
+import ProductModel from "../Models/ProductModel.js"
 
-// get all the data
-
-function getAll(req, res, next) {
-  try {
-    ProductModel.find({}, (err, response) => {
-      if (err) return next(err);
-      res.status(200).send({ succes: true, response });
-    });
-  } catch (err) {
-    res.status(400).send({ succes: false, err });
-  }
+// ADD a Product
+function addProduct(req, res, next) {
+    try {
+        let data = req.body
+        let ProductData = new ProductModel(data)
+        ProductData.save()
+        res.status(200).json({ response: ProductData })
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ err })
+    }
 }
 
-// get by id
-function GetByID(req, res, next) {
-  let { id } = req.params;
-  ProductModel.findById({ _id: id }, (err, response) => {
-    if (err) return next(err);
-    res.status(200).send({ succes: true, response });
-  });
-}
-//   delete
-function Delete(req, res, next) {
-  let i = req.params.id;
-  ProductModel.findByIdAndDelete({ _id: i }, (err, response) => {
-    if (err) return next(err);
-    res.status(200).send({ succes: true, response });
-  });
+// Get all the data of Product
+async function getProduct(req, res, next) {
+    try {
+        const get = await ProductModel.find({})
+        res.status(200).json({ response: get })
+    } catch (err) {
+        res.status(400).json(err)
+    }
 }
 
-// // create
-function Add(req, res, next) {
-  let body = req.body;
-  let doc = new ProductModel(body);
-  doc.save((err, response) => {
-    if (err) return next(err);
-    res.status(200).send({ success: true, response });
-  });
+// Get Product By id
+async function getProductByID(req, res, next) {
+    let id=req.params.id
+    try {
+        const getById = await ProductModel.findById({_id:id})
+        res.status(200).json({ response: getById })
+    } catch (err) {
+        res.status(400).json(err)
+    }
 }
 
-function Update(req, res, next) {
-    let id = req.params.id;
-    let body = req.body;
-    ProductModel.updateOne({ _id: id }, { $set: body }, (err, response) => {
-      if (err) return next(err);
-      res.status(200).send({ success: true, response });
-    });
-  }
+// Delete Product by id
+async function deleteProduct(req, res, next) {
+    let id = req.params.id
+    try {
+        const deleteById = await ProductModel.findByIdAndDelete({ _id: id })
+        res.status(200).json({ message: "Product delete success", response : deleteById})
+    } catch (err) {
+        res.status(400).json(err)
+    }
+}
 
-const controller = { getAll, GetByID, Add, Delete ,Update};
+// Update Product By id
+async function updateProduct(req,res,next){
+    let id = req.params.id
+    let data = req.body
+    try{
+        await ProductModel.updateOne({_id:id , $set:data})
+        let response = await ProductModel.findById({_id:id})
+        res.status(200).json({message : "Update sucss" , response })
+    }catch(err){
+        res.status(400).json(err)
+    }
+}
+const Product = {addProduct ,getProduct, getProductByID ,deleteProduct ,updateProduct}
 
-export default ProductController;
+export default Product ;
