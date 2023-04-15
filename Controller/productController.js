@@ -1,4 +1,4 @@
-import ProductModel from "../Models/ProductModel.js"
+import ProductModel from "../Models/productModel.js"
 
 // ADD a Product
 function addProduct(req, res, next) {
