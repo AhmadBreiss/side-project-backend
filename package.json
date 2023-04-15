@@ -1,16 +1,7 @@
 {
-  "type": "module",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "mongodb": "^5.2.0",
-    "mongoose": "^7.0.3",
-    "morgan": "^1.10.0"
-  },
   "name": "side-project-backend",
-  "description": "",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
@@ -22,11 +13,21 @@
   },
   "author": "",
   "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.2.0",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
   "bugs": {
     "url": "https://github.com/AhmadBreiss/side-project-backend/issues"
   },
-  "homepage": "https://github.com/AhmadBreiss/side-project-backend#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.22"
-  }
+  "homepage": "https://github.com/AhmadBreiss/side-project-backend#readme"
 }
