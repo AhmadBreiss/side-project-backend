@@ -31,6 +31,6 @@ const userSchema = new Schema(
   }
 );
 
-const ProductModel = model("Product", ProductSchema);
+const userModel = model("User", userSchema);
 
-export default ProductModel;
+export default userModel;
