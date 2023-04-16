@@ -5,6 +5,7 @@ import connectDB from "./config/db.js";
 import cors from "cors";
 import productRouter from './Routes/productRoute.js';
 import categoryRouter from "./Routes/categoryRoute.js";
+import userRouter from "./Routes/userRoute.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(cors());
 app.use('/product' , productRouter)
 app.use('/category' , categoryRouter)
+app.use('/user' , userRouter)
 app.listen(
   PORT,
   console.log(`Server Running in ${process.env.NODE_ENV} mode on Port ${PORT}`)
